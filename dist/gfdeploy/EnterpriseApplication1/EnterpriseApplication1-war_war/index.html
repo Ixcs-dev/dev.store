@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>.DevTech - Tu tienda de gadgets y accesorios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3498db',
+                        secondary: '#2ecc71',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+ <header class="bg-white shadow-md" x-data="{ isOpen: false }">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="./index.html" class="text-2xl font-bold">.DevTech</a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="./index.html" class="text-gray-600 hover:text-red-600">Inicio</a>
+                    <div class="relative" x-data="{ open: false }">
+                        <button @click="open = !open" class="text-gray-600 hover:text-red-600 flex items-center">
+                            Productos
+                            <svg class="ml-1 h-4 w-4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="open" @click.away="open = false" class="absolute z-50 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                <a href="page/product.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100" role="menuitem">Smartphones</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100" role="menuitem">Laptops</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100" role="menuitem">Tablets</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100" role="menuitem">Accesorios</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="page/nosotros.html" class="text-gray-600 hover:text-red-600">Nosotros</a>
+                    <div class="relative">
+                        <input type="text" placeholder="Buscar productos..." class="bg-gray-100 rounded-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-red-600">
+                        <button class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                            <svg class="h-5 w-5 text-gray-500" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </button>
+                    </div>
+                    <a href="page/login.html" class="text-gray-600 hover:text-red-600">Login</a>
+                    <button class="text-gray-600 hover:text-red-600 relative cart-icon">
+                        <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Navigation Toggle -->
+                <button @click="isOpen = !isOpen" class="md:hidden text-gray-600 hover:text-red-600" id="mobile-menu-button">
+                    <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div x-show="isOpen" class="md:hidden mt-4" id="mobile-menu">
+                <a href="index.html" class="block py-2 text-gray-600 hover:text-red-600">Inicio</a>
+                <div x-data="{ open: false }">
+                    <button @click="open = !open" class="w-full text-left py-2 text-gray-600 hover:text-red-600 flex items-center justify-between">
+                        Productos
+                        <svg class="h-4 w-4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div x-show="open" class="pl-4">
+                        <a href="page/product.html" class="block py-2 text-gray-600 hover:text-red-600">Smartphones</a>
+                        <a href="#" class="block py-2 text-gray-600 hover:text-red-600">Laptops</a>
+                        <a href="#" class="block py-2 text-gray-600 hover:text-red-600">Tablets</a>
+                        <a href="#" class="block py-2 text-gray-600 hover:text-red-600">Accesorios</a>
+                    </div>
+                </div>
+                <a href="page/nosotros.html" class="block py-2 text-gray-600 hover:text-red-600">Nosotros</a>
+                <a href="page/login.html" class="block py-2 text-gray-600 hover:text-red-600">Login</a>
+                <a href="page/carrito.html" class="block py-2 text-gray-600 hover:text-red-600">
+                    <svg class="h-6 w-6 inline-block mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    Carrito
+                    <span id="mobile-cart-count" class="bg-red-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center text-xs ml-1">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <!-- Mini Cart -->
+    <div id="mini-cart" class="fixed right-0 top-0 mt-16 mr-4 hidden z-50"></div>
+    
+    
+    <section class="relative bg-[url('public/img/banner.webp')] bg-cover bg-center bg-no-repeat">
+        <div class="mx-auto max-w-screen-x2 px-4 py-32 lg:items-center">
+            <div class="mx-auto max-w-xl text-center">
+                <h1 class="text-white text-3xl font-extrabold sm:text-5xl">
+                    Bienvenidos a
+                    <strong class="font-extrabold text-red-500 sm:block"> .DevTech </strong>
+                </h1>
+          
+                <p class="mt-4 text-white sm:text-xl/relaxed">
+                    Tu destino para los mejores gadgets y accesorios tecnológicos.
+                </p>
+          
+                <div class="mt-8 flex flex-wrap justify-center gap-4">
+                    <a
+                        class="block w-full rounded bg-red-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-red-700 focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
+                        href="page/product.html"
+                    >
+                        Ver Productos
+                    </a>
+          
+                    <a
+                        class="block w-full rounded px-12 py-3 text-sm font-medium text-white shadow hover:text-red-100 focus:outline-none focus:ring active:text-red-500 sm:w-auto"
+                        href="page/nosotros.html"
+                    >
+                        Conócenos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-8">
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Productos Destacados</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Producto 1 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden product-item transition-transform duration-300 hover:shadow-md hover:-translate-y-1" data-category="Samsung" data-price="699.99">
+                    <img src="public/img/Sm/sm1.webp" alt="Smartphone XYZ" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <a href="./page//productos-pages/smartphones.html" class="block mb-2">
+                            <h2 class="text-lg font-semibold text-gray-800 hover:text-red-600 transition duration-300">Samsung Galaxy A55</h2>
+                        </a>
+                        <p class="text-sm text-gray-600 mb-3 line-clamp-2">El último modelo con cámara de alta resolución y batería de larga duración.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-red-600">$
+                                1.394.900</span>
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm transition duration-300 add-to-cart" data-product-id="1" data-product-name="Samsung Galaxy A55" data-price="1394900">
+                                Agregar al carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Producto 2 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden product-item transition-transform duration-300 hover:shadow-md hover:-translate-y-1" data-category="smartphones" data-price="699.99">
+                    <img src="public/img/Sm/sm2.webp" alt="Smartphone XYZ" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <a href="./page//productos-pages/smartphones.html" class="block mb-2">
+                            <h2 class="text-lg font-semibold text-gray-800 hover:text-red-600 transition duration-300">iPhone 15</h2>
+                        </a>
+                        <p class="text-sm text-gray-600 mb-3 line-clamp-2">El último modelo con cámara de alta resolución y batería de larga duración.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-red-600">$3.099.900</span>
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm transition duration-300 add-to-cart" data-product-id="2" data-product-name="iPhone 15" data-price="3099900">
+                                Agregar al carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Producto 3 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden product-item transition-transform duration-300 hover:shadow-md hover:-translate-y-1" data-category="smartphones" data-price="699.99">
+                    <img src="public/img/Sm/sm3.webp" alt="Smartphone XYZ" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <a href="./page//productos-pages/smartphones.html" class="block mb-2">
+                            <h2 class="text-lg font-semibold text-gray-800 hover:text-red-600 transition duration-300">Samsung Galaxy S24 Ultra</h2>
+                        </a>
+                        <p class="text-sm text-gray-600 mb-3 line-clamp-2">El último modelo con cámara de alta resolución y batería de larga duración.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-red-600">$4.084.900</span>
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm transition duration-300 add-to-cart" data-product-id="3" data-product-name="Samsung Galaxy S24 Ultra" data-price="4084900">
+                                Agregar al carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Producto 4 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden product-item transition-transform duration-300 hover:shadow-md hover:-translate-y-1" data-category="smartphones" data-price="699.99">
+                    <img src="public/img/Sm/sm4.webp" alt="Smartphone XYZ" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <a href="./page//productos-pages/smartphones.html" class="block mb-2">
+                            <h2 class="text-lg font-semibold text-gray-800 hover:text-red-600 transition duration-300">Xiaomi Redmi Note 10s 128gb</h2>
+                        </a>
+                        <p class="text-sm text-gray-600 mb-3 line-clamp-2">El último modelo con cámara de alta resolución y batería de larga duración.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-red-600">$499.900</span>
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm transition duration-300 add-to-cart" data-product-id="4" data-product-name="Xiaomi Redmi Note 10s" data-price="499900">
+                                Agregar al carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Producto 5 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden product-item transition-transform duration-300 hover:shadow-md hover:-translate-y-1" data-category="smartphones" data-price="699.99">
+                    <img src="public/img/Sm/sm5.webp" alt="Smartphone XYZ" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <a href="./page//productos-pages/smartphones.html" class="block mb-2">
+                            <h2 class="text-lg font-semibold text-gray-800 hover:text-red-600 transition duration-300">iPhone 14 Pro</h2>
+                        </a>
+                        <p class="text-sm text-gray-600 mb-3 line-clamp-2">El último modelo con cámara de alta resolución y batería de larga duración.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-red-600">$2.799.000</span>
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm transition duration-300 add-to-cart" data-product-id="5" data-product-name="iPhone 14 Pro" data-price="2799000">
+                                Agregar al carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Producto 6 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden product-item transition-transform duration-300 hover:shadow-md hover:-translate-y-1" data-category="smartphones" data-price="699.99">
+                    <img src="public/img/Sm/sm6.webp" alt="iPhone XR 256 Gb-negro" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <a href="./page//productos-pages/smartphones.html" class="block mb-2">
+                            <h2 class="text-lg font-semibold text-gray-800 hover:text-red-600 transition duration-300">iPhone XR 256 Gb-negro</h2>
+                        </a>
+                        <p class="text-sm text-gray-600 mb-3 line-clamp-2">El último modelo con cámara de alta resolución y batería de larga duración.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-red-600">$1.190.000</span>
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm transition duration-300 add-to-cart" data-product-id="6" data-product-name="iPhone XR" data-price="1190000">
+                                Agregar al carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+        </section>
+        
+        <section>
+            <h2 class="text-2xl font-semibold mb-4">Ofertas Especiales</h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-semibold mb-2">¡Oferta de la semana!</h3>
+                <p class="text-gray-600 mb-4">Obtén un 20% de descuento en todos los accesorios para smartphones. ¡No te lo pierdas!</p>
+                <a href="/page/product.html" class="bg-red-600 text-white px-6 py-2 rounded hover:bg-opacity-80 inline-block">Ver ofertas</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">.DevTech</h3>
+                    <p>Tu tienda de confianza para gadgets y accesorios tecnológicos.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Enlaces rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-red-600">Inicio</a></li>
+                        <li><a href="#" class="hover:text-red-600">Nosotros</a></li>
+                        <li><a href="#" class="hover:text-red-600">Productos</a></li>
+                        <li><a href="#" class="hover:text-red-600">Contacto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contacto</h3>
+                    <p>Email: info@devtech.com</p>
+                    <p>Teléfono: (123) 456-7890</p>
+                    <p>Dirección: Calle Tecnología 123, Ciudad Tech</p>
+                </div>
+            </div>
+            <div class="mt-8 text-center">
+                <p>&copy; 2024 .DevTech Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>

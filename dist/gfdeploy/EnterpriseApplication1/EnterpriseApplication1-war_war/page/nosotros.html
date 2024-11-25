@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>.DevTech - Tu tienda de gadgets y accesorios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3498db',
+                        secondary: '#2ecc71',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+  <header class="bg-white shadow-md" x-data="{ isOpen: false }">
+    <nav class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+            <a href="/index.html" class="text-2xl font-bold">.DevTech</a>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="/index.html" class="text-gray-600 hover:text-red-600">Inicio</a>
+                <div class="relative" x-data="{ open: false }">
+                    <button @click="open = !open" class="text-gray-600 hover:text-red-600 flex items-center">
+                        Productos
+                        <svg class="ml-1 h-4 w-4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div x-show="open" @click.away="open = false" class="absolute z-50 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                        <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                            <a href="/page/product.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100" role="menuitem">Smartphones</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100" role="menuitem">Laptops</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100" role="menuitem">Tablets</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100" role="menuitem">Accesorios</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="/page/nosotros.html" class="text-gray-600 hover:text-red-600">Nosotros</a>
+                <div class="relative">
+                    <input type="text" placeholder="Buscar productos..." class="bg-gray-100 rounded-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-red-600">
+                    <button class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                        <svg class="h-5 w-5 text-gray-500" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
+                </div>
+                <button class="text-gray-600 hover:text-red-600 relative cart-icon">
+                    <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation Toggle -->
+            <button @click="isOpen = !isOpen" class="md:hidden text-gray-600 hover:text-red-600" id="mobile-menu-button">
+                <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                    <path d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div x-show="isOpen" class="md:hidden mt-4" id="mobile-menu">
+            <a href="/index.html" class="block py-2 text-gray-600 hover:text-red-600">Inicio</a>
+            <div x-data="{ open: false }">
+                <button @click="open = !open" class="w-full text-left py-2 text-gray-600 hover:text-red-600 flex items-center justify-between">
+                    Productos
+                    <svg class="h-4 w-4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div x-show="open" class="pl-4">
+                    <a href="/page/product.html" class="block py-2 text-gray-600 hover:text-red-600">Smartphones</a>
+                    <a href="#" class="block py-2 text-gray-600 hover:text-red-600">Laptops</a>
+                    <a href="#" class="block py-2 text-gray-600 hover:text-red-600">Tablets</a>
+                    <a href="#" class="block py-2 text-gray-600 hover:text-red-600">Accesorios</a>
+                </div>
+            </div>
+            <a href="/page/nosotros.html" class="block py-2 text-gray-600 hover:text-red-600">Nosotros</a>
+            <div class="relative mt-2">
+                <input type="text" placeholder="Buscar productos..." class="w-full bg-gray-100 rounded-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-red-600">
+                <button class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                    <svg class="h-5 w-5 text-gray-500" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </button>
+            </div>
+            <a href="/page/carrito.html" class="block py-2 text-gray-600 hover:text-red-600">
+                <svg class="h-6 w-6 inline-block mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                Carrito
+                <span id="mobile-cart-count" class="bg-red-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center text-xs ml-1">0</span>
+            </a>
+        </div>
+    </nav>
+</header>
+<!-- Mini Cart -->
+<div id="mini-cart" class="fixed right-0 top-0 mt-16 mr-4 hidden z-50"></div>
+
+    <section  class="relative bg-[url('/public/img/umg.jpg')] bg-cover bg-center bg-no-repeat"
+    >
+        <div class=" mx-auto max-w-screen-x2 px-4 py-32  lg:items-center">
+          <div class="mx-auto max-w-xl text-center">
+            <h1 class="text-white text-3xl font-extrabold sm:text-5xl">
+              Bienvenidos a
+              <strong class="font-extrabold text-red-500 sm:block"> .DevTech </strong>
+            </h1>
+      
+            <p class="mt-4 text-white sm:text-xl/relaxed">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt illo tenetur fuga ducimus
+              numquam ea!
+            </p>
+      
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+              <a
+                class="block w-full rounded bg-red-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-red-700 focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
+                href="#"
+              >
+                Get Started
+              </a>
+      
+              <a
+                class="block w-full rounded px-12 py-3 text-sm font-medium text-white shadow hover:text-red-100 focus:outline-none focus:ring active:text-red-500 sm:w-auto"
+                href="#"
+              >
+                Learn More
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold mb-8 text-center">Sobre Nosotros</h1>
+
+        <section class="bg-white">
+            <div class="mx-auto max-w-screen-2xl px-4 py-3 sm:px-6 lg:px-8">
+              <div class="grid grid-cols-1 lg:h-screen lg:grid-cols-2">
+                <div class="relative z-10 lg:py-16">
+                  <div class="relative h-64 sm:h-80 lg:h-full">
+                    <img
+                      alt=""
+                      src="https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                      class="absolute inset-0 h-full w-full object-cover"
+                    />
+                  </div>
+                </div>
+          
+                <div class="relative flex items-center ">
+                  <span
+                    class="hidden lg:absolute lg:inset-y-0 lg:-start-16 lg:block lg:w-16"
+                  ></span>
+          
+                  <div class="p-8 sm:p-16 lg:p-24">
+                    <h2 class="text-2xl font-bold sm:text-3xl">
+                      Nuestra Historia
+                    </h2>
+          
+                    <p class="mt-4 text-gray-600">
+                        TechStore nació en 2024 con la visión de hacer la tecnología accesible para todos. Fundada por un grupo de entusiastas de la tecnología, nuestra tienda ha crecido desde un pequeño local hasta convertirse en un referente en el mercado de gadgets y accesorios tecnológicos.
+
+                        A lo largo de los años, hemos mantenido nuestro compromiso con la calidad, la innovación y el servicio al cliente, adaptándonos constantemente a las nuevas tendencias y necesidades del mercado.
+                    </p>
+          
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        <section class="bg-white">
+            <div class="mx-auto max-w-screen-xl px-16 py-16 sm:px-6 sm:py- lg:px-4">
+              <div class="max-w-3xl">
+                <h2 class="text-3xl font-bold sm:text-4xl">
+                    Nuestra Misión
+                </h2>
+              </div>
+          
+              <div class="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
+          
+                <div class="lg:py-">
+                  <article class="space-y-4 text-gray-600">
+                    <p>
+                        En .DevTech, nuestra misión es proporcionar a nuestros clientes los mejores productos tecnológicos del mercado a precios competitivos, junto con un servicio al cliente excepcional. Nos esforzamos por ser más que una tienda; queremos ser un socio confiable en el viaje tecnológico de nuestros clientes.
+                    </p>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        <section class="bg-white">
+            <div class="max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+              <div class="max-w-xl">
+                <h2 class="text-3xl font-bold sm:text-4xl">Nuestros Valores</h2>
+                
+              </div>
+              
+              <div class="mt-8 grid grid-cols-1 gap-8 md:mt-16 md:grid-cols-2 md:gap-12 lg:grid-cols-3">
+                <div class="flex items-start gap-4">
+                    
+                  <span class="shrink-0 rounded-lg bg-gray-800 p-4">
+                    <svg
+                      class="size-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                      <path
+                        d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                      ></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                      ></path>
+                    </svg>
+                  </span>
+                  <div>
+                    
+                    <h2 class="text-lg font-bold">Innovación.</h2>
+          
+                    <p class="mt-1 text-sm">
+                        Siempre buscamos las últimas tendencias y tecnologías
+                    </p>
+                  </div>
+                </div>
+          
+                <div class="flex items-start gap-4">
+                  <span class="shrink-0 rounded-lg bg-gray-800 p-4">
+                    <svg
+                      class="size-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                      <path
+                        d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                      ></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                      ></path>
+                    </svg>
+                  </span>
+          
+                  <div>
+                    <h2 class="text-lg font-bold">Calidad</h2>
+          
+                    <p class="mt-1 text-sm">
+                        Ofrecemos solo productos de la más alta calidad.
+                    </p>
+                  </div>
+                </div>
+          
+                <div class="flex items-start gap-4">
+                  <span class="shrink-0 rounded-lg bg-gray-800 p-4">
+                    <svg
+                      class="size-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                      <path
+                        d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                      ></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                      ></path>
+                    </svg>
+                  </span>
+          
+                  <div>
+                    <h2 class="text-lg font-bold">Integridad</h2>
+          
+                    <p class="mt-1 text-sm">
+                        Somos honestos y transparentes en todas nuestras operaciones.
+                        Servicio al cliente: Nos esforzamos por superar las expectativas de nuestros
+                    </p>
+                  </div>
+                </div>
+          
+                <div class="flex items-start gap-4">
+                  <span class="shrink-0 rounded-lg bg-gray-800 p-4">
+                    <svg
+                      class="size-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                      <path
+                        d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                      ></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                      ></path>
+                    </svg>
+                  </span>
+          
+                  <div>
+                    <h2 class="text-lg font-bold">Sostenibilidad</h2>
+          
+                    <p class="mt-1 text-sm">
+                        Nos comprometemos a reducir nuestro impacto ambiental.
+                    </p>
+                  </div>
+                </div>
+          
+              
+          </section>
+
+       <section class="bg-white">
+  <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+    <h2 class="text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+      Nuestro Equipo
+    </h2>
+
+    <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
+      <blockquote class="rounded-lg bg-gray-200 p-6 shadow-sm sm:p-8">
+        <div class="flex items-center gap-4">
+          <img
+            alt=""
+            src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+            class="size-14 rounded-full object-cover"
+          />
+
+          <div>
+            <p class="mt-0.5 text-lg font-medium text-red-600">Paul Starr</p>
+          </div>
+        </div>
+
+        <p class="mt-4 text-gray-700">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sit rerum incidunt, a
+          consequuntur recusandae ab saepe illo est quia obcaecati neque quibusdam eius accusamus
+          error officiis atque voluptates magnam!
+        </p>
+      </blockquote>
+
+      <blockquote class="rounded-lg bg-gray-200 p-6 shadow-sm sm:p-8">
+        <div class="flex items-center gap-4">
+          <img
+            alt=""
+            src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+            class="size-14 rounded-full object-cover"
+          />
+
+          <div>
+            <p class="mt-0.5 text-lg font-medium text-red-600">Paul Starr</p>
+          </div>
+        </div>
+
+        <p class="mt-4 text-gray-700">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sit rerum incidunt, a
+          consequuntur recusandae ab saepe illo est quia obcaecati neque quibusdam eius accusamus
+          error officiis atque voluptates magnam!
+        </p>
+      </blockquote>
+
+      <blockquote class="rounded-lg bg-gray-200 p-6 shadow-sm sm:p-8">
+        <div class="flex items-center gap-4">
+          <img
+            alt=""
+            src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+            class="size-14 rounded-full object-cover"
+          />
+
+          <div>
+            <p class="mt-0.5 text-lg font-medium text-red-600">Paul Starr</p>
+          </div>
+        </div>
+
+        <p class="mt-4 text-gray-700">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sit rerum incidunt, a
+          consequuntur recusandae ab saepe illo est quia obcaecati neque quibusdam eius accusamus
+          error officiis atque voluptates magnam!
+        </p>
+      </blockquote>
+    </div>
+  </div>
+</section>
+    </main>
+
+    <footer class="bg-black text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">.DevTech</h3>
+                    <p>Tu tienda de confianza para gadgets y accesorios tecnológicos.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Enlaces rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-red-600">Inicio</a></li>
+                        <li><a href="#" class="hover:text-red-600">Nosotros</a></li>
+                        <li><a href="#" class="hover:text-red-600">Productos</a></li>
+                        <li><a href="#" class="hover:text-red-600">Contacto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contacto</h3>
+                    <p>Email: info@techstore.com</p>
+                    <p>Teléfono: (123) 456-7890</p>
+                    <p>Dirección: Calle Tecnología 123, Ciudad Tech</p>
+                </div>
+            </div>
+            <div class="mt-8 text-center">
+                <p>&copy; 2024 .DevTech Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+<script src="../js/main.js">
+</script>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>.DevTech - Tu tienda de gadgets y accesorios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3498db',
+                        secondary: '#2ecc71',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow-md" x-data="{ isOpen: false }">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/index.html" class="text-2xl font-bold">.DevTech</a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="/index.html" class="text-gray-600 hover:text-red-600">Inicio</a>
+                    <div class="relative" x-data="{ open: false }">
+                        <button @click="open = !open" class="text-gray-600 hover:text-red-600 flex items-center">
+                            Productos
+                            <svg class="ml-1 h-4 w-4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="open" @click.away="open = false" class="absolute z-50 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                <a href="/page/product.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100" role="menuitem">Smartphones</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100" role="menuitem">Laptops</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100" role="menuitem">Tablets</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100" role="menuitem">Accesorios</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="./page/nosotros.html" class="text-gray-600 hover:text-red-600">Nosotros</a>
+                    <div class="relative">
+                        <input type="text" placeholder="Buscar productos..." class="bg-gray-100 rounded-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-red-600">
+                        <button class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                            <svg class="h-5 w-5 text-gray-500" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </button>
+                    </div>
+                    <button class="text-gray-600 hover:text-red-600 relative cart-icon">
+                        <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Navigation Toggle -->
+                <button @click="isOpen = !isOpen" class="md:hidden text-gray-600 hover:text-red-600" id="mobile-menu-button">
+                    <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div x-show="isOpen" class="md:hidden mt-4" id="mobile-menu">
+                <a href="/index.html" class="block py-2 text-gray-600 hover:text-red-600">Inicio</a>
+                <div x-data="{ open: false }">
+                    <button @click="open = !open" class="w-full text-left py-2 text-gray-600 hover:text-red-600 flex items-center justify-between">
+                        Productos
+                        <svg class="h-4 w-4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div x-show="open" class="pl-4">
+                        <a href="/page/product.html" class="block py-2 text-gray-600 hover:text-red-600">Smartphones</a>
+                        <a href="#" class="block py-2 text-gray-600 hover:text-red-600">Laptops</a>
+                        <a href="#" class="block py-2 text-gray-600 hover:text-red-600">Tablets</a>
+                        <a href="#" class="block py-2 text-gray-600 hover:text-red-600">Accesorios</a>
+                    </div>
+                </div>
+                <a href="./page/nosotros.html" class="block py-2 text-gray-600 hover:text-red-600">Nosotros</a>
+                <div class="relative mt-2">
+                    <input type="text" placeholder="Buscar productos..." class="w-full bg-gray-100 rounded-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-red-600">
+                    <button class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                        <svg class="h-5 w-5 text-gray-500" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
+                </div>
+                <a href="#" class="block py-2 text-gray-600 hover:text-red-600">
+                    <svg class="h-6 w-6 inline-block mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    Carrito
+                    <span id="mobile-cart-count" class="bg-red-600 text-white rounded-full w-5 h-5 inline-flex items-center justify-center text-xs ml-1">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mini Cart -->
+    <div id="mini-cart" class="fixed right-0 top-0 mt-16 mr-4 hidden z-50"></div>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Imagen del producto -->
+            <div class="md:w-1/2">
+                <img id="main-product-image" src="../public/img/p2.webp" alt="Smartphone XYZ" class="w-full h-auto rounded-lg shadow-md">
+                <div class="mt-4 flex gap-2 overflow-x-auto">
+                    <img src="../public/img/p1.webp" alt="Smartphone XYZ - Vista 1" class="w-24 h-24 object-cover rounded cursor-pointer product-thumbnail">
+                    <img src="../public/img/p1.webp" alt="Smartphone XYZ - Vista 2" class="w-24 h-24 object-cover rounded cursor-pointer product-thumbnail">
+                    <img src="../public/img/p1.webp" alt="Smartphone XYZ - Vista 3" class="w-24 h-24 object-cover rounded cursor-pointer product-thumbnail">
+                    <img src="../public/img/p1.webp" alt="Smartphone XYZ - Vista 4" class="w-24 h-24 object-cover rounded cursor-pointer product-thumbnail">
+                </div>
+            </div>
+
+            <!-- Detalles del producto -->
+            <div class="md:w-1/2">
+                <h1 class="text-3xl font-bold mb-4">Audifonos XYZ</h1>
+                <div class="flex items-center mb-4">
+                    <div class="flex text-yellow-400">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                        </svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                        </svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                        </svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18  21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                        </svg>
+                        <svg class="w-5 h-5 fill-current text-gray-400" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                        </svg>
+                    </div>
+                    <span class="ml-2 text-gray-600">(150 reseñas)</span>
+                </div>
+                <p class="text-2xl font-bold mb-4">$599.99</p>
+                <p class="text-gray-600 mb-6">
+                    El Smartphone XYZ es el último modelo con cámara de alta resolución y batería de larga duración. Disfruta de una experiencia de usuario fluida con su potente procesador y amplia memoria.
+                </p>
+                <div class="mb-6">
+                    <h2 class="text-lg font-semibold mb-2">Características principales:</h2>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Pantalla AMOLED de 6.5 pulgadas</li>
+                        <li>Cámara triple de 64MP + 12MP + 5MP</li>
+                        <li>Batería de 5000mAh con carga rápida</li>
+                        <li>Procesador octa-core de última generación</li>
+                        <li>8GB de RAM y 128GB de almacenamiento</li>
+                    </ul>
+                </div>
+                <div class="mb-6">
+                    <label for="color" class="block text-sm font-medium text-gray-700 mb-2">Color:</label>
+                    <select id="color" name="color" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-red-600">
+                        <option>Negro</option>
+                        <option>Blanco</option>
+                        <option>Azul</option>
+                    </select>
+                </div>
+                <div class="mb-6">
+                    <label for="quantity" class="block text-sm font-medium text-gray-700 mb-2">Cantidad:</label>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-red-600">
+                </div>
+                <div class="flex gap-4">
+                    <button id="add-to-cart-button" class="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-opacity-80 transition duration-300 flex-grow">Agregar al carrito</button>
+                    <a href="/page/pagos.html" class="flex-grow">
+                        <button class="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-opacity-80 transition duration-300">Comprar ahora</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-black text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">.DevTech</h3>
+                    <p>Tu tienda de confianza para gadgets y accesorios tecnológicos.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Enlaces rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="hover:text-red-600">Inicio</a></li>
+                        <li><a href="nosotros.html" class="hover:text-red-600">Nosotros</a></li>
+                        <li><a href="#" class="hover:text-red-600">Smartphones</a></li>
+                        <li><a href="#" class="hover:text-red-600">Laptops</a></li>
+                        <li><a href="#" class="hover:text-red-600">Tablets</a></li>
+                        <li><a href="#" class="hover:text-red-600">Accesorios</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contacto</h3>
+                    <p>Email: info@devtech.com</p>
+                    <p>Teléfono: (123) 456-7890</p>
+                    <p>Dirección: Calle Tecnología 123, Ciudad Tech</p>
+                </div>
+            </div>
+            <div class="mt-8 text-center">
+                <p>&copy; 2024 .DevTech Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
